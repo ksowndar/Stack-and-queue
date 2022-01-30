@@ -24,26 +24,43 @@ myStack.pop(); // return 2
 myStack.empty(); // return False
 
 PROGRAM:
-
-class MyStack {
-
-    private Queue<Integer> queue = new LinkedList<>();
-
+    int top;
+    int [] q=new int[100];
+    public MyStack() {
+        top=-1;
+    }
+    
     public void push(int x) {
-        queue.add(x);
-        for (int i=1; i<queue.size(); i++)
-            queue.add(queue.remove());
+        if(top==-1)
+            top=1;
+        q[top]=x;   
+        top=top+1;
     }
-
+    
     public int pop() {
-        return queue.remove();
+        int x= q[top];
+        top=top-1;
+        return top;
     }
-
+    
     public int top() {
-        return queue.peek();
+        int x=q[top-1];
+        return x;
     }
-
+    
     public boolean empty() {
-        return queue.isEmpty();
+        if(top<=1)
+            return true;
+        else
+            return false;
     }
 }
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
