@@ -22,31 +22,51 @@ myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
 myQueue.peek(); // return 1
 myQueue.pop(); // return 1, queue is [2]
 myQueue.empty(); // return false
-
 class MyQueue {
-    Stack<Integer> s1 = new Stack();
-    Stack<Integer> s2 = new Stack(); 
-  
+    int front,rear,size=0;
+    int[] s=new int[100];
+
+    public MyQueue() {
+        front=-1;
+        rear=-1;
+    }
+    
     public void push(int x) {
-      while (!s2.isEmpty())
-        s1.push(s2.pop());
-      s1.push(x);
+        if(front==-1)
+        {
+            front=0;
+            rear=0;
+        }
+        s[rear]=x;
+        size++;
+        rear++;
     }
-
+    
     public int pop() {
-      while (!s1.isEmpty())
-        s2.push(s1.pop());
-      return s2.pop();
+        int x=s[front];
+        front++;
+        size--;
+        return x;
     }
-     
+    
     public int peek() {
-      while (!s1.isEmpty())
-        s2.push(s1.pop());     
-      return s2.peek();
+        int x=s[front];
+        return x;
     }
-
-
+    
     public boolean empty() {
-      return s1.isEmpty() && s2.isEmpty();
+        if(size<=0)
+            return true;
+        else
+            return false;
     }
-  }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
